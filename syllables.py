@@ -2,12 +2,11 @@ from nltk.corpus import cmudict
 d = cmudict.dict()
 import re
 
+dict_filename = 'cmudict.rep'
 
 def syllable_num(word):
     if is_NOP(word):
         return 0
-    if is_camel_case(word):
-        return handle_camel_case(word)
     try:
         return [len(list(y for y in x if y[-1].isdigit())) for x in d[word.lower()]][0]
     except KeyError:
@@ -46,6 +45,10 @@ def count_syllables_manually(word):
     if count == 0:
         count +=1
     return count
+
+def get_syllable_list(word):
+    # TODO : implement this
+    print( syllable_dict['seriously'])
 
 if __name__ == '__main__':
     print(syllable_num('const'))
