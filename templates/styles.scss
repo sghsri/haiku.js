@@ -9,47 +9,99 @@ $fourth-color: #FBF6D4;
 /* ==================
   Global
   ================== */
-  html, body, div, span, applet, object, iframe,
-  h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-  a, abbr, acronym, address, big, cite, code,
-  del, dfn, em, img, ins, kbd, q, s, samp,
-  small, strike, strong, sub, sup, tt, var,
-  b, u, i, center,
-  dl, dt, dd, ol, ul, li,
-  fieldset, form, label, legend,
-  table, caption, tbody, tfoot, thead, tr, th, td,
-  article, aside, canvas, details, embed,
-  figure, figcaption, footer, header, hgroup,
-  menu, nav, output, ruby, section, summary,
-  time, mark, audio, video {
-  	margin: 0;
-  	padding: 0;
-  	border: 0;
-  	vertical-align: baseline;
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+h1, h2, h1 span, h2 span {
+  font-family: 'Yeseva One', cursive;
+}
+
+h3, h4, h5, h6 {
+  font-family: 'Merriweather', serif;
+}
+
+* {
+  font-family: 'Merriweather Sans', sans-serif;
+}
+
+button.button {
+  border-radius: 20px;
+  bottom: 0px;
+  font-family: 'Merriweather Sans', sans-serif;
+  font-size: 20px;
+  height: 40px;
+  margin: 3px 10px;
+  padding: 2px 20px;
+  position: relative;
+  text-transform: uppercase;
+  transition: all .2s;
+  -webkit-transition: all .2s;
+  background: #fff;
+
+  &.button-primary {
+    border: 3px solid $primary-color;
+    color: $third-color;
+
+    &:hover {
+      background: $primary-color;
+      color: $secondary-color;
+    }
   }
-  /* HTML5 display-role reset for older browsers */
-  article, aside, details, figcaption, figure,
-  footer, header, hgroup, menu, nav, section {
-  	display: block;
+
+  &.button-secondary {
+    border: 3px solid $secondary-color;
+    color: $third-color;
+
+    &:hover {
+      background: $secondary-color;
+    }
   }
-  body {
-  	line-height: 1;
+
+  &:hover {
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    bottom: 2px;
   }
-  ol, ul {
-  	list-style: none;
-  }
-  blockquote, q {
-  	quotes: none;
-  }
-  blockquote:before, blockquote:after,
-  q:before, q:after {
-  	content: '';
-  	content: none;
-  }
-  table {
-  	border-collapse: collapse;
-  	border-spacing: 0;
-  }
+}
+
 
 /* ==================
   Hero
@@ -62,15 +114,32 @@ $fourth-color: #FBF6D4;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  background-color: red;
   height: 100vh;
   width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  position: relative;
 
   .hero-content {
-    width: 300px;
-    background: #fff;
+    position: absolute;
+    bottom: 50px;
+    left: 50px;
+
+    h1 {
+      font-size: 50px;
+      margin: 15px 0;
+
+      span {
+        background: $secondary-color;
+        color: $primary-color;
+        padding: 5px 15px 5px 10px;
+        font-style: italic;
+      }
+    }
+
+    p {
+      max-width: 600px;
+      background: $secondary-color;
+      color: $primary-color;
+      padding: 10px;
+    }
   }
 }

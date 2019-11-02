@@ -52,6 +52,52 @@ table {
   border-spacing: 0;
 }
 
+h1, h2, h1 span, h2 span {
+  font-family: "Yeseva One", cursive;
+}
+
+h3, h4, h5, h6 {
+  font-family: "Merriweather", serif;
+}
+
+* {
+  font-family: "Merriweather Sans", sans-serif;
+}
+
+button.button {
+  border-radius: 20px;
+  bottom: 0px;
+  font-family: "Merriweather Sans", sans-serif;
+  font-size: 20px;
+  height: 40px;
+  margin: 3px 10px;
+  padding: 2px 20px;
+  position: relative;
+  text-transform: uppercase;
+  transition: all 0.2s;
+  -webkit-transition: all 0.2s;
+  background: #fff;
+}
+button.button.button-primary {
+  border: 3px solid #FDD8E7;
+  color: #CBF2E7;
+}
+button.button.button-primary:hover {
+  background: #FDD8E7;
+  color: #283031;
+}
+button.button.button-secondary {
+  border: 3px solid #283031;
+  color: #CBF2E7;
+}
+button.button.button-secondary:hover {
+  background: #283031;
+}
+button.button:hover {
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  bottom: 2px;
+}
+
 /* ==================
   Hero
   ================== */
@@ -62,16 +108,30 @@ table {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  background-color: red;
   height: 100vh;
   width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  position: relative;
 }
 #hero .hero-content {
-  width: 300px;
-  background: #fff;
+  position: absolute;
+  bottom: 50px;
+  left: 50px;
+}
+#hero .hero-content h1 {
+  font-size: 50px;
+  margin: 15px 0;
+}
+#hero .hero-content h1 span {
+  background: #283031;
+  color: #FDD8E7;
+  padding: 5px 15px 5px 10px;
+  font-style: italic;
+}
+#hero .hero-content p {
+  max-width: 600px;
+  background: #283031;
+  color: #FDD8E7;
+  padding: 10px;
 }
 
 /*# sourceMappingURL=styles.css.map */
