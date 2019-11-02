@@ -1,13 +1,3 @@
-function potato(input, seeds, dude){
-    if(condition){
-        do_something()
-    }
-    return input+seeds+dude;
-}
-
-
-onStartup();
-
 chrome.runtime.onMessage.addListener(function (request, sender, response) {
     switch (request.command) {
         case "courseStorage":

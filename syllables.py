@@ -8,8 +8,6 @@ def syllable_num(word):
     except KeyError:
         return count_syllables_manually(word)
 
-
-
 def count_syllables_manually(word):
     count = 0
     vowels = 'aeiouy'
