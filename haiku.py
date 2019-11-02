@@ -73,7 +73,7 @@ def print_haiku(haiku):
 
 
 def haiku(input_text):
-    # first got to remove all delimites and punctuation
+    # first got to remove all delimiters and punctuation
     # then, need to make a list of keywords, numbers, assignments, etc
     # then, feed into haiku generation engine
     # then send to front-end ui
