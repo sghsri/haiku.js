@@ -1,5 +1,6 @@
 import re
 from syllables import syllable_num
+from github_scrape import scrape_github_file
 
 haiku_pattern = [5,7,5]
 
