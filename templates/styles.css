@@ -102,7 +102,6 @@ button.button:hover {
   Hero
   ================== */
 #hero {
-  background-image: url("images/bg2.gif");
   background-position: center center;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -111,6 +110,11 @@ button.button:hover {
   height: 100vh;
   width: 100%;
   position: relative;
+  -webkit-transition: all 1s ease-in;
+  -moz-transition: all 1s ease-in;
+  -o-transition: all 1s ease-in;
+  -ms-transition: all 1s ease-in;
+  transition: all 1s ease-in;
 }
 #hero .hero-content {
   position: absolute;

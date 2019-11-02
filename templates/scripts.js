@@ -29,3 +29,15 @@ document.getElementById('button').addEventListener("click", function(){
     var msg = new SpeechSynthesisUtterance(code);
     window.speechSynthesis.speak(msg);
 });
+
+document.addEventListener("DOMContentLoaded", function(){
+
+
+  let picIndex = Math.ceil(Math.random() * 5);
+  $('#hero').css("background-image", "url(images/bg" + picIndex + ".gif)");
+
+  window.setInterval(function(){
+    $('#hero').css("background-image", "url(images/bg" + picIndex + ".gif)");
+    picIndex = picIndex % 5 + 1;
+  }, 10000);
+});
