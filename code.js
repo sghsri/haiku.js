@@ -1,6 +1,9 @@
-function potato(input, seeds, dude){
+const test = getElementByID();
+
+
+function asdf(input, seeds, dude){
     if(condition){
-        doSomething()
+        doSomething();
     }
     return input+seeds+dude;
 }

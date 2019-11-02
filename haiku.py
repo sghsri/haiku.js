@@ -1,8 +1,10 @@
 import re
-from syllables import syllable_num
+from syllables import syllable_num, get_syllable_list
 from github_scrape import scrape_github_file
 
 haiku_pattern = [5,7,5]
+left_chars = ['(', '[']
+right_chars = [';', ',', ')', ']']
 
 def load_js_file(file_name):
     with open('./{}.js'.format(file_name)) as html_file:
@@ -26,17 +28,17 @@ def split_up_camel(words_string):
 def get_all_list(input_text):
     all_list = split_by_extraneous_symbols(input_text)
     all_list = ' '.join(all_list).split(' ')
-    all_list = list(map(lambda symbol: split_up_camel(symbol).strip().lower(),all_list))
+    all_list = list(map(lambda symbol: symbol.strip(),all_list))
     all_list = list(filter(lambda symbol: symbol, all_list))
     return all_list
 
-def get_word_list(input_text):
-    words_string = remove_extraneous_symbols(input_text)
-    words_string = split_up_camel(words_string)
-    word_list = words_string.split(' ')
-    word_list = list(map(lambda word: word.strip().lower(), word_list))
-    word_list = list(filter(lambda word: word, word_list))
-    return word_list
+# def get_word_list(input_text):
+#     words_string = remove_extraneous_symbols(input_text)
+#     words_string = split_up_camel(words_string)
+#     word_list = words_string.split(' ')
+#     word_list = list(map(lambda word: word.strip().lower(), word_list))
+#     word_list = list(filter(lambda word: word, word_list))
+#     return word_list
 
 def syllable_map(word_list):
     return {word: syllable_num(word) for word in word_list}
@@ -60,6 +62,9 @@ def build_haiku_from_map(word_list, syl_map):
                 if num_syl+line_count <= syl_per_line:
                     line.append(word)
                     line_count += num_syl
+                else:
+                    # if we're here, the whole word wouldn't fit at the end of the line
+                    
                 if line_count == syl_per_line:
                     break
             else:
@@ -69,12 +74,23 @@ def build_haiku_from_map(word_list, syl_map):
     return haiku
 
 def print_haiku(haiku):
+    # added extra formatting so that we only add spaces where it makes sense
+    # we want (input, seeds, dude) instead of ( input , seeds , dude )
     for line in haiku:
-        print(' '.join(line))
+        for i in range(len(line)):
+            word = line[i]
+            end_char = ' '
+            if word in left_chars:
+                end_char = ''
+            elif i + 1 < len(line) and line[i + 1] in right_chars:
+                end_char = ''
+
+            print(word, end=end_char)
+        print("")
 
 
 def haiku(input_text):
-    # first got to remove all delimites and punctuation
+    # first got to remove all delimiters and punctuation
     # then, need to make a list of keywords, numbers, assignments, etc
     # then, feed into haiku generation engine
     # then send to front-end ui
