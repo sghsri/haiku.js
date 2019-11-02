@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Page Title</title>
+  <title>Haiku.js</title>
   <meta charset="utf-8" />
   <!-- other meta, CSS, and custom tags -->
   <link rel="stylesheet" href="styles.css">
@@ -39,6 +39,39 @@
     <button id="button">
         Hello
     </button>
+  </section>
+
+  <section id="editor">
+    <h2 class="text-center"><span>Editor</span></h2>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-6 editor input">
+          <textarea>
+// Input
+function potato(input, seeds, dude){
+   if(condition){
+       doSomething()
+   }
+   return input+seeds+dude;
+}</textarea>
+        </div>
+        <div class="col-lg-6 editor output">
+          <textarea></textarea>
+        </div>
+      </div>
+      <br>
+      <div class="text-center">
+        <button class="button button-primary text-center">Convert</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="footer">
+    <footer>
+      <div class="container">
+        <p>Made at HackTX by Chris, Levi, Sriram and Suchir</p>
+      </div>
+    </footer>
   </section>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
