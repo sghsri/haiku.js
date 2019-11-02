@@ -1,0 +1,3 @@
+function potato
+( input , seeds , dude ) { if ( ) { ( ) } return
+input + seeds + dude ; }

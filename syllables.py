@@ -1,14 +1,36 @@
 from nltk.corpus import cmudict
 d = cmudict.dict()
+import re
 
 
 def syllable_num(word):
+    if is_NOP(word):
+        return 0
+    if is_camel_case(word):
+        return handle_camel_case(word)
     try:
         return [len(list(y for y in x if y[-1].isdigit())) for x in d[word.lower()]][0]
     except KeyError:
         return count_syllables_manually(word)
 
+def is_NOP(symbol):
+    return bool(re.search(r"[.,\/#!$%\^&\*\"\';:{}=\-_`~()+-><]",symbol))
+
+def is_camel_case(symbol):
+    return bool(re.search(r"(?:[A-Z][a-z]+)+",symbol))
+
+def handle_camel_case(symbol):
+    words = re.split(r"(?:[A-Z][a-z]+)+",symbol)
+    num_syllables = 0
+    for word in words:
+        num_syllables += syllable_num(word)
+    return num_syllables
+
+def is_special(symbol):
+    return is_camel_case(symbol)
+
 def count_syllables_manually(word):
+
     count = 0
     vowels = 'aeiouy'
     word = word.lower()
