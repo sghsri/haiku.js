@@ -57,3 +57,15 @@ document.getElementById('button').addEventListener("click", function(){
     let url = resolve_input();
     query_backend(url);
 });
+
+document.addEventListener("DOMContentLoaded", function(){
+
+
+  let picIndex = Math.ceil(Math.random() * 5);
+  $('#hero').css("background-image", "url(images/bg" + picIndex + ".gif)");
+
+  window.setInterval(function(){
+    $('#hero').css("background-image", "url(images/bg" + picIndex + ".gif)");
+    picIndex = picIndex % 5 + 1;
+  }, 10000);
+});
