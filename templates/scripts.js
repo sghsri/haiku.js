@@ -12,7 +12,7 @@ function get_line_end_char(){
 
 function long_pause(){
     let periods = "";
-    for(let i = 0; i<6;i++){
+    for(let i = 0; i<3;i++){
         periods += " ! ";
     }
     return periods;
@@ -89,12 +89,13 @@ function fill_input_from_url(url){
 }
 
 function play_haiku(haiku){
-    var player = new SpeechSynthesisUtterance(haiku);
-    player.rate = .85;
-    player.pitch = .75;
-    window.speechSynthesis.speak(player);
+    window.speechSynthesis.cancel();
+    var speaker = new SpeechSynthesisUtterance(haiku);
+    speaker.rate = .85;
+    speaker.pitch = .75;
+    window.speechSynthesis.speak(speaker);
 
-    player.addEventListener('end', function(event) {
+    speaker.addEventListener('end', function(event) {
       $('#old-man').animate({right: "-300px"}, 1000);
     });
 }
