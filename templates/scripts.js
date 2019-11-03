@@ -1,4 +1,4 @@
-const haiku_code = `// Input
+let haiku_code = `// Input
 function potato(input, seeds, dude){
    if(condition){
        doSomething()
@@ -68,13 +68,17 @@ function put_in_output(haikus){
 }
 
 function query_backend_using_url(url){
+    console.log("querying backend");
      fetch(url).then(response => {
         return response.json();
     }).then(haikus => {
         put_in_output(haikus);
+        console.log("haiku code is " + haiku_code)
         let read_haiku = add_reading_to_all_haikus(haikus)
         play_haiku(read_haiku);
     }).catch(err => {
+        console.log("ERROR")
+        console.log(err)
         return err;
     })
 }
@@ -130,9 +134,7 @@ document.getElementById('convert_button').addEventListener("click", function(){
 });
 
 document.getElementById('execute_button').addEventListener("click", function(){
-    console.log("run");
-    console.log(haiku_code);
-    eval(haiku_code);
+    eval(document.getElementById('input').value);
 });
 
 document.getElementById('input_button').addEventListener("click", function(){
