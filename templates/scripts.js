@@ -30,14 +30,34 @@ document.getElementById('button').addEventListener("click", function(){
     window.speechSynthesis.speak(msg);
 });
 
+var player;
+
 document.addEventListener("DOMContentLoaded", function(){
-
-
   let picIndex = Math.ceil(Math.random() * 5);
   $('#hero').css("background-image", "url(images/bg" + picIndex + ".gif)");
+
+  window.setInterval(function(){
+    player.playVideo();
+  }, 100);
 
   window.setInterval(function(){
     $('#hero').css("background-image", "url(images/bg" + picIndex + ".gif)");
     picIndex = picIndex % 5 + 1;
   }, 10000);
 });
+
+function onYouTubeIframeAPIReady() {
+    player = new YT.Player('video-placeholder', {
+        width: 1,
+        height: 1,
+        videoId: 'hHW1oY26kxQ',
+        playerVars: {
+            color: 'white',
+            playlist: 'taJ60kskkns,FG0fTKAqZ5g'
+        }
+    });
+}
+
+function play () {
+  player.playVideo();
+}

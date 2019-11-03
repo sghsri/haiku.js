@@ -98,6 +98,10 @@ button.button:hover {
   bottom: 2px;
 }
 
+.lofi {
+  position: absolute;
+}
+
 /* ==================
   Hero
   ================== */
