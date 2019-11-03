@@ -70,9 +70,27 @@ function play_haiku(haiku){
     player.rate = .85;
     player.pitch = .75;
     window.speechSynthesis.speak(player);
+
+    player.addEventListener('end', function(event) {
+      $('#old-man').animate({right: "-300px"}, 1000);
+    });
 }
 
 document.getElementById('convert_button').addEventListener("click", function(){
+    $('#old-man').animate({right: "25px"}, 1000);
+
+    let foo = "0 0";
+
+    window.setInterval(function(){
+      $('#old-man').css("background-position", foo);
+
+      if (foo === "0 0") {
+        foo = "250px 250px";
+      } else {
+        foo = "0 0";
+      }
+    }, Math.random()*100+Math.random()*500);
+
     let url = resolve_input();
     if(url){
         query_backend_using_url(url);

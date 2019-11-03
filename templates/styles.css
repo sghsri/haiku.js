@@ -103,6 +103,23 @@ button.button:hover {
   position: absolute;
 }
 
+#old-man {
+  animation: all 1s;
+  -webkit-animation: all 1s;
+  position: fixed;
+  display: block;
+  z-index: 999999;
+  height: 250px;
+  width: 250px;
+  top: 25px;
+  right: -300px;
+  border-radius: 20px;
+  -webkit-border-radius: 20px;
+  background-image: url(images/sprite.png);
+  background-size: 250px 500px;
+  background-position: 500px 500px;
+}
+
 /* ==================
   Hero
   ================== */
