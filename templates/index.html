@@ -45,19 +45,24 @@
   <section id="editor">
     <h2 class="text-center"><span>Editor</span></h2>
     <div class="container-fluid">
+        <div class="text-center" id="import_form">
+                <input type="url" name="url" id="github_input" placeholder="https://github.com/sghsri/js_haiku/blob/master/code.js"><br>
+                <button  id="input_button"> Import from Github</button>
+        </div>
       <div class="row">
         <div class="col-lg-6 editor input">
-          <textarea>
-// Input
-function potato(input, seeds, dude){
-   if(condition){
-       doSomething()
-   }
-   return input+seeds+dude;
-}</textarea>
+          <textarea id="input">
+    // Input
+    function potato(input, seeds, dude){
+       if(condition){
+           doSomething()
+       }
+       return input+seeds+dude;
+    }
+         </textarea>
         </div>
         <div class="col-lg-6 editor output">
-          <textarea></textarea>
+          <textarea id="output"></textarea>
         </div>
       </div>
       <br>

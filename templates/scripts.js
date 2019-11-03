@@ -1,8 +1,11 @@
 
+const base = 'http://localhost:5000/';
 function resolve_input(){
-    return 'http://localhost:5000/haiku/github/?url=https://github.com/sghsri/UT-Registration-Plus/blob/master/js/import.js';
+    let url = document.getElementById('github_input').value;
+    if(url){
+        return base+'haiku/github/?url='+url;
+    }
 }
-
 function get_line_end_char(){
     let chars = [' ? ', ' ! '];
     console.log(chars);
@@ -31,17 +34,33 @@ function remove_extraneous(haiku){
     return haiku.replace(/[.,\/#!$%\^&\*\"\';:{}=\-_`~()+-><]/g, "");
 }
 
-function query_backend(url, pause=true){
+function put_in_output(haiku){
+    document.getElementById('output').value = "// Output\n"+haiku.join('\n');
+}
+
+function query_backend_using_url(url, pause=true){
      fetch(url).then(response => {
         return response.json();
     }).then(haiku => {
-        console.log(haiku);
-        // haiku = haiku.replace(/[.,\/#!$%\^&\*\"\';:{}=\-_`~()+-><]/g, "");
+        put_in_output(haiku);
         if(pause)
             haiku = add_random_pause(haiku);
         else
             haiku = haiku.join(' ');
         play_haiku(haiku);
+    }).catch(err => {
+        return err;
+    })
+}
+
+function fill_input_from_url(url, pause=true){
+    let api_url = base+'github/?url='+url;
+     fetch(api_url).then(response => {
+        return response.json();
+    }).then(code => {
+        console.log(code);
+        document.getElementById('input').value = code;
+        document.getElementById('github_input').value = '';
     }).catch(err => {
         return err;
     })
@@ -55,8 +74,21 @@ function play_haiku(haiku){
 
 document.getElementById('convert_button').addEventListener("click", function(){
     let url = resolve_input();
-    query_backend(url);
+    if(url){
+        query_backend_using_url(url);
+    } else {
+        let input_text = document.getElementById('input').value.replace(/\r?\n|\r/g, "");
+        let url = base+'haiku/text/?text='+input_text;
+        query_backend_using_url(url);
+    }
+
 });
+
+document.getElementById('input_button').addEventListener("click", function(){
+    let url = document.getElementById('github_input').value;
+    fill_input_from_url(url);
+});
+
 
 document.addEventListener("DOMContentLoaded", function(){
   let picIndex = Math.ceil(Math.random() * 5);

@@ -8,25 +8,29 @@ def validate_github_url(url):
     return bool(re.search(regex,url))
 
 
-def scrape_github_file(url):
+def scrape_github_file(url, clean_up=True):
     if validate_github_url(url):
         page = get_souped_page_from_url(url)
         code = page.select('table')
-        code_string = get_code_as_string(code)
+        code_string = get_code_as_string(code, clean_up)
         return code_string
     else:
         raise ValueError
 
 # clean up the item text, by removing the bracket text and the random new line characters
 def clean_up_item(item):
-    item = re.sub("[\(\[].*?[\)\]]", "", item) # remove braket text
-    item = item.replace("\n\n", "  ") #replace the double new lines with double space for language maps
+    item = item.replace("\n\n", "  ") # replace the double new lines with double space for language maps
     item = ' '.join(item.split())
     return item
 
 
-def get_code_as_string(code):
-    return clean_up_item(''.join(extract_text_from_tag_array(code)))
+
+
+def get_code_as_string(code, clean_up):
+    uncleaned = ''.join(extract_text_from_tag_array(code));
+    if clean_up:
+        return clean_up_item(uncleaned)
+    return re.sub(r'\n+', '\n', uncleaned).strip()
 
 # build a url based on the ethnologue base, and return the "souped" i.e wrapped html string response of the page
 def get_souped_page_from_url(full_url):
@@ -37,7 +41,6 @@ def get_souped_page_from_url(full_url):
 def get_page_as_string(link):
     response = requests.get(link)
     return response.content
-
 
 # given an array of beautifulsoup tags, return a list of all the texts of all the tags
 def extract_text_from_tag_array(tags):

@@ -16,6 +16,18 @@ def get_github_haiku():
     code_haiku = haiku(code)
     return prepare_response(code_haiku)
 
+@app.route("/haiku/text/")
+def get_text_haiku():
+    code = request.args.get('text')
+    code_haiku = haiku(code)
+    return prepare_response(code_haiku)
+
+@app.route("/github/")
+def get_original_github():
+    url = request.args.get('url')
+    code = scrape_github_file(url,False)
+    return prepare_response(code)
+
 
 if __name__ == "__main__":
   app.run()
