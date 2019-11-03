@@ -127,7 +127,9 @@ document.getElementById('convert_button').addEventListener("click", function(){
 });
 
 document.getElementById('execute_button').addEventListener("click", function(){
-    eval(document.getElementById('input').value);
+    let code = document.getElementById('output').value.replace('// Output','').replace(/\r?\n|\r/g, "");
+    console.log(code);
+    eval(code);
 });
 
 document.getElementById('input_button').addEventListener("click", function(){
