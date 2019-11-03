@@ -1,8 +1,19 @@
+
+function resolve_input(){
+    return 'http://localhost:5000/haiku/github/?url=https://github.com/sghsri/UT-Registration-Plus/blob/master/js/import.js';
+}
+
+function get_line_end_char(){
+    let chars = [' ? ', ' ! '];
+    console.log(chars);
+    return chars[Math.floor(Math.random()*chars.length)];
+}
 function random_pauses(){
     let periods = "";
     let num_periods = Math.random() * (3 - 1) + 1;
+    let line_end_char = get_line_end_char();
     for(let i = 0; i<num_periods;i++){
-        periods += " ! "
+        periods += line_end_char;
     }
     return periods;
 }
@@ -10,31 +21,52 @@ function random_pauses(){
 function add_random_pause(code){
     let code_string = ""
     code.forEach((line)=>{
-        code_string += line
+        code_string += remove_extraneous(line);
         code_string += random_pauses();
     });
-    return code_string
-
-}
-function get_code(pause=true){
-    let code = ['function potato','( input , seeds , dude ) { if ( ) { ( ) } return', 'input + seeds + dude ; }'];
-    if(pause)
-        return add_random_pause(code);
-    return code
+    return code_string;
 }
 
-document.getElementById('button').addEventListener("click", function(){
-    let code = get_code()
-    console.log(code);
-    var msg = new SpeechSynthesisUtterance(code);
-    window.speechSynthesis.speak(msg);
+function remove_extraneous(haiku){
+    return haiku.replace(/[.,\/#!$%\^&\*\"\';:{}=\-_`~()+-><]/g, "");
+}
+
+function query_backend(url, pause=true){
+     fetch(url).then(response => {
+        return response.json();
+    }).then(haiku => {
+        console.log(haiku);
+        // haiku = haiku.replace(/[.,\/#!$%\^&\*\"\';:{}=\-_`~()+-><]/g, "");
+        if(pause)
+            haiku = add_random_pause(haiku);
+        else
+            haiku = haiku.join(' ');
+        play_haiku(haiku);
+    }).catch(err => {
+        return err;
+    })
+}
+
+function play_haiku(haiku){
+    console.log(haiku);
+    var player = new SpeechSynthesisUtterance(haiku);
+    window.speechSynthesis.speak(player);
+}
+
+document.getElementById('convert_button').addEventListener("click", function(){
+    let url = resolve_input();
+    query_backend(url);
 });
 
+var player;
+
 document.addEventListener("DOMContentLoaded", function(){
-
-
   let picIndex = Math.ceil(Math.random() * 5);
   $('#hero').css("background-image", "url(images/bg" + picIndex + ".gif)");
+
+  window.setInterval(function(){
+    player.playVideo();
+  }, 100);
 
   window.setInterval(function(){
     $('#hero').css("background-image", "url(images/bg" + picIndex + ".gif)");
@@ -42,7 +74,7 @@ document.addEventListener("DOMContentLoaded", function(){
   }, 10000);
 });
 
-document.body.addEventListener("click", addTreats);
+document.body.addEventListener("click", addBlossoms);
 
 let width = $(window).width()
 let height = $(window).height()
@@ -58,7 +90,7 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-const treats = [];
+const blossoms = [];
 const radius = 20;
 
 const Cd = 0.47; // Dimensionless
@@ -67,7 +99,7 @@ const A = Math.PI * radius * radius / 10000; // m^2
 const ag = 9.81; // m / s^2
 const frameRate = 1 / 60;
 
-function createTreat(e) /* create a treat */ {
+function createblossom(e) /* create a blossom */ {
   const vx = getRandomArbitrary(-10, 10); // x velocity
   const vy = getRandomArbitrary(-10, 1);  // y velocity
 
@@ -80,7 +112,7 @@ function createTreat(e) /* create a treat */ {
 
   el.style.setProperty("--lifetime", lifetime);
 
-  const treat = {
+  const blossom = {
     el,
     absolutePosition: { x: width / 2, y: 0 },
     position: { x: e.clientX, y: e.clientY },
@@ -98,54 +130,54 @@ function createTreat(e) /* create a treat */ {
     },
 
     animate() {
-      const treat = this;
+      const blossom = this;
       let Fx =
         -0.5 *
         Cd *
         A *
         rho *
-        treat.velocity.x *
-        treat.velocity.x *
-        treat.velocity.x /
-        Math.abs(treat.velocity.x);
+        blossom.velocity.x *
+        blossom.velocity.x *
+        blossom.velocity.x /
+        Math.abs(blossom.velocity.x);
       let Fy =
         -0.5 *
         Cd *
         A *
         rho *
-        treat.velocity.y *
-        treat.velocity.y *
-        treat.velocity.y /
-        Math.abs(treat.velocity.y);
+        blossom.velocity.y *
+        blossom.velocity.y *
+        blossom.velocity.y /
+        Math.abs(blossom.velocity.y);
 
       Fx = isNaN(Fx) ? 0 : Fx;
       Fy = isNaN(Fy) ? 0 : Fy;
 
       // Calculate acceleration ( F = ma )
-      var ax = Fx / treat.mass;
-      var ay = ag + Fy / treat.mass;
+      var ax = Fx / blossom.mass;
+      var ay = ag + Fy / blossom.mass;
       // Integrate to get velocity
-      treat.velocity.x += ax * frameRate;
-      treat.velocity.y += ay * frameRate;
+      blossom.velocity.x += ax * frameRate;
+      blossom.velocity.y += ay * frameRate;
 
       // Integrate to get position
-      treat.position.x += treat.velocity.x * frameRate * 100;
-      treat.position.y += treat.velocity.y * frameRate * 100;
+      blossom.position.x += blossom.velocity.x * frameRate * 100;
+      blossom.position.y += blossom.velocity.y * frameRate * 100;
 
-      treat.checkBounds();
-      treat.update();
+      blossom.checkBounds();
+      blossom.update();
     },
 
     checkBounds() {
 
-      if (treat.position.y > height) {
-        treat.remove();
+      if (blossom.position.y > height) {
+        blossom.remove();
       }
-      if (treat.position.x > width) {
-        treat.remove();
+      if (blossom.position.x > width) {
+        blossom.remove();
       }
-      if (treat.position.x + treat.radius < 0) {
-        treat.remove();
+      if (blossom.position.x + blossom.radius < 0) {
+        blossom.remove();
       }
     },
 
@@ -159,17 +191,17 @@ function createTreat(e) /* create a treat */ {
     }
   };
 
-  return treat;
+  return blossom;
 }
 
 
 function animationLoop() {
-  var i = treats.length;
+  var i = blossoms.length;
   while (i--) {
-    treats[i].animate();
+    blossoms[i].animate();
 
-    if (!treats[i].animating) {
-      treats.splice(i, 1);
+    if (!blossoms[i].animating) {
+      blossoms.splice(i, 1);
     }
   }
 
@@ -178,12 +210,27 @@ function animationLoop() {
 
 animationLoop();
 
-function addTreats(e) {
+function addBlossoms(e) {
   //cancelAnimationFrame(frame);
-  if (treats.length > 40) {
+  if (blossoms.length > 40) {
     return;
   }
   for (let i = 0; i < 20; i++) {
-    treats.push(createTreat(e));
+    blossoms.push(createblossom(e));
   }
 }
+
+function onYouTubeIframeAPIReady() {
+    player = new YT.Player('video-placeholder', {
+        width: 1,
+        height: 1,
+        videoId: 'hHW1oY26kxQ',
+        playerVars: {
+            color: 'white',
+            playlist: 'taJ60kskkns,FG0fTKAqZ5g'
+        }
+    });
+}
+
+function play () {
+  player.playVideo();
