@@ -1,10 +1,3 @@
-let haiku_code = `// Input
-function potato(input, seeds, dude){
-   if(condition){
-       doSomething()
-   }
-   return input+seeds+dude;
-}`;
 const base = 'http://localhost:5000/';
 function resolve_input(){
     let url = document.getElementById('github_input').value;
@@ -73,7 +66,6 @@ function query_backend_using_url(url){
         return response.json();
     }).then(haikus => {
         put_in_output(haikus);
-        console.log("haiku code is " + haiku_code)
         let read_haiku = add_reading_to_all_haikus(haikus)
         play_haiku(read_haiku);
     }).catch(err => {
