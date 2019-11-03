@@ -53,14 +53,12 @@ function play_haiku(haiku){
     window.speechSynthesis.speak(player);
 }
 
-document.getElementById('button').addEventListener("click", function(){
+document.getElementById('convert_button').addEventListener("click", function(){
     let url = resolve_input();
     query_backend(url);
 });
 
 document.addEventListener("DOMContentLoaded", function(){
-
-
   let picIndex = Math.ceil(Math.random() * 5);
   $('#hero').css("background-image", "url(images/bg" + picIndex + ".gif)");
 

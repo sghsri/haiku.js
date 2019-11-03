@@ -62,9 +62,7 @@ def build_haiku_from_map(word_list, syl_map):
                 if num_syl+line_count <= syl_per_line:
                     line.append(word)
                     line_count += num_syl
-                else:
-                    # if we're here, the whole word wouldn't fit at the end of the line
-                    
+                # if we're here, the whole word wouldn't fit at the end of the line
                 if line_count == syl_per_line:
                     break
             else:
