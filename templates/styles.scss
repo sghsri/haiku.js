@@ -102,6 +102,9 @@ button.button {
   }
 }
 
+.lofi {
+  position: absolute;
+}
 
 /* ==================
   Hero
@@ -144,6 +147,7 @@ button.button {
       background: $secondary-color;
       color: $primary-color;
       padding: 10px;
+      margin-right: 25px
     }
   }
 }
@@ -191,5 +195,9 @@ button.button {
     padding: 25px;
     margin-top: 25px;
     text-align: center;
+
+    p {
+      margin-bottom: 0;
+    }
   }
 }

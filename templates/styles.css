@@ -140,6 +140,7 @@ button.button:hover {
   background: #283031;
   color: #FDD8E7;
   padding: 10px;
+  margin-right: 25px;
 }
 
 /* ==================
@@ -176,6 +177,9 @@ button.button:hover {
   padding: 25px;
   margin-top: 25px;
   text-align: center;
+}
+#footer footer p {
+  margin-bottom: 0;
 }
 
 /*# sourceMappingURL=styles.css.map */
