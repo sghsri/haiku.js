@@ -89,10 +89,13 @@ document.getElementById('input_button').addEventListener("click", function(){
     fill_input_from_url(url);
 });
 var player;
+const colors = ["#F7CED9", "#D1FFD4", "#FCCFEB", "#E6E6E6", "#ACD0CB"]
 
 document.addEventListener("DOMContentLoaded", function(){
   let picIndex = Math.ceil(Math.random() * 5);
   $('#hero').css("background-image", "url(images/bg" + picIndex + ".gif)");
+  $('#hero-title').css("color", colors[picIndex - 1]);
+  $('#hero-subtitle').css("color", colors[picIndex - 1]);
 
   window.setInterval(function(){
     player.playVideo();
@@ -100,6 +103,8 @@ document.addEventListener("DOMContentLoaded", function(){
 
   window.setInterval(function(){
     $('#hero').css("background-image", "url(images/bg" + picIndex + ".gif)");
+    $('#hero-title').css("color", colors[picIndex - 1]);
+    $('#hero-subtitle').css("color", colors[picIndex - 1]);
     picIndex = picIndex % 5 + 1;
   }, 10000);
 });
@@ -242,9 +247,6 @@ animationLoop();
 
 function addBlossoms(e) {
   //cancelAnimationFrame(frame);
-  if (blossoms.length > 40) {
-    return;
-  }
   for (let i = 0; i < 20; i++) {
     blossoms.push(createblossom(e));
   }
