@@ -205,7 +205,7 @@ function createblossom(e) /* create a blossom */ {
 
     checkBounds() {
 
-      if (blossom.position.y > height) {
+      if (blossom.position.y + blossom.radius / 2 > height) {
         blossom.remove();
       }
       if (blossom.position.x > width) {
