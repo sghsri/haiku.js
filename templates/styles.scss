@@ -34,6 +34,7 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
+	overflow-x: hidden;
 }
 ol, ul {
 	list-style: none;
@@ -102,6 +103,9 @@ button.button {
   }
 }
 
+.lofi {
+  position: absolute;
+}
 
 /* ==================
   Hero
@@ -144,6 +148,7 @@ button.button {
       background: $secondary-color;
       color: $primary-color;
       padding: 10px;
+      margin-right: 25px
     }
   }
 }
@@ -191,5 +196,72 @@ button.button {
     padding: 25px;
     margin-top: 25px;
     text-align: center;
+
+    p {
+      margin-bottom: 0;
+    }
   }
+}
+
+.blossom {
+  --scale-x: 0;
+  --scale-y: 0;
+	background: url('./images/blossom.png') no-repeat;
+	background-size: cover;
+  pointer-events: none;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: calc(50% - .5rem);
+  border-radius: 50%;
+	z-index: 1000;
+  width: 1em;
+  height: 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 5vmin;
+  transform:
+    translate(
+      calc( var(--x) * 1px ),
+      calc( var(--y) * 1px )
+    )
+    translate(-50%, -50%);
+  pointer-events: none;
+  animation:
+    treat-enter .1s ease-in backwards,
+    treat-exit 300ms linear
+    calc( (var(--lifetime, 3000) * 1ms) - 300ms)
+    forwards;
+
+  @keyframes treat-enter {
+    from {
+      opacity: 0;
+    }
+  }
+  @keyframes treat-exit {
+    to {
+      opacity: 0;
+    }
+  }
+
+  .inner {
+    animation: inner-rotate .6s linear infinite;
+    transform: rotate(
+      calc(-1turn * var(--direction) )
+    );
+    @keyframes inner-rotate {
+      to {
+        transform: none;
+      }
+    }
+  }
+}
+
+.button-wrapper {
+	position: absolute;
+}
+
+.lofi {
+  position: absolute;
 }
