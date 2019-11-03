@@ -122,10 +122,10 @@ button.button:hover {
   transition: all 1s ease-in;
 }
 #hero #hero-title {
-  transition: 0.3s color;
+  transition: 1s color;
 }
 #hero #hero-subtitle {
-  transition: 0.3s color;
+  transition: 1s color;
 }
 #hero .hero-content {
   position: absolute;
