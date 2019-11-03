@@ -90,11 +90,9 @@ button.button {
 
   &.button-secondary {
     border: 3px solid $secondary-color;
+		background: $secondary-color;
     color: $third-color;
 
-    &:hover {
-      background: $secondary-color;
-    }
   }
 
   &:hover {
@@ -194,6 +192,18 @@ button.button {
   }
 }
 
+#import_form {
+  input {
+    width: 500px;
+    background: $secondary-color;
+    border: 5px solid $third-color;
+    color: $third-color;
+    padding: 5px 15px;
+    border-radius: 20px;
+    -webkit-border-radius: 20px
+  }
+}
+
 /* ==================
   Footer
   ================== */
@@ -272,4 +282,10 @@ button.button {
 
 .lofi {
   position: absolute;
+}
+
+.level {
+	display: flex;
+	width: 100%;
+	justify-content: center;
 }

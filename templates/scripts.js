@@ -1,4 +1,10 @@
-
+const haiku_code = `// Input
+function potato(input, seeds, dude){
+   if(condition){
+       doSomething()
+   }
+   return input+seeds+dude;
+}`;
 const base = 'http://localhost:5000/';
 function resolve_input(){
     let url = document.getElementById('github_input').value;
@@ -105,6 +111,12 @@ document.getElementById('convert_button').addEventListener("click", function(){
 
 });
 
+document.getElementById('execute_button').addEventListener("click", function(){
+    console.log("run");
+    console.log(haiku_code);
+    eval(haiku_code);
+});
+
 document.getElementById('input_button').addEventListener("click", function(){
     let url = document.getElementById('github_input').value;
     fill_input_from_url(url);
@@ -118,9 +130,10 @@ document.addEventListener("DOMContentLoaded", function(){
   $('#hero-title').css("color", colors[picIndex - 1]);
   $('#hero-subtitle').css("color", colors[picIndex - 1]);
 
-  window.setInterval(function(){
+  let video_loop = window.setInterval(function(){
     player.playVideo();
-  }, 100);
+  }, 500);
+
 
   window.setInterval(function(){
     $('#hero').css("background-image", "url(images/bg" + picIndex + ".gif)");
@@ -226,7 +239,7 @@ function createblossom(e) /* create a blossom */ {
 
     checkBounds() {
 
-      if (blossom.position.y > height) {
+      if (blossom.position.y + blossom.radius / 2 > height) {
         blossom.remove();
       }
       if (blossom.position.x > width) {

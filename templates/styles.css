@@ -89,10 +89,8 @@ button.button.button-primary:hover {
 }
 button.button.button-secondary {
   border: 3px solid #283031;
-  color: #CBF2E7;
-}
-button.button.button-secondary:hover {
   background: #283031;
+  color: #CBF2E7;
 }
 button.button:hover {
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
@@ -175,6 +173,16 @@ button.button:hover {
   background-color: #CBF2E7;
 }
 
+#import_form input {
+  width: 500px;
+  background: #283031;
+  border: 5px solid #CBF2E7;
+  color: #CBF2E7;
+  padding: 5px 15px;
+  border-radius: 20px;
+  -webkit-border-radius: 20px;
+}
+
 /* ==================
   Footer
   ================== */
@@ -237,6 +245,12 @@ button.button:hover {
 
 .lofi {
   position: absolute;
+}
+
+.level {
+  display: flex;
+  width: 100%;
+  justify-content: center;
 }
 
 /*# sourceMappingURL=styles.css.map */
