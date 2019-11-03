@@ -16,8 +16,15 @@ def remove_extraneous_symbols(input_text):
     result = re.sub(regex, ' ', input_text)
     return result
 
+def remove_comments(input_text):
+    block_regex = r"\/\*(.+)\*\/"
+    normal_regex = r"\/\/(.+)\n"
+    result = re.sub(block_regex,' ', input_text)
+    result = re.sub(normal_regex, ' ', result)
+    return result
 
 def split_by_extraneous_symbols(input_text):
+    input_text = remove_comments(input_text)
     regex = r"([.,\/#!$%\^&\*\"\';:{}=\-`~()+-><])"
     result = re.split(regex, input_text)
     return result

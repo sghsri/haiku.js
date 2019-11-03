@@ -173,6 +173,16 @@ button.button:hover {
   background-color: #CBF2E7;
 }
 
+#import_form input {
+  width: 500px;
+  background: #283031;
+  border: 5px solid #CBF2E7;
+  color: #CBF2E7;
+  padding: 5px 15px;
+  border-radius: 20px;
+  -webkit-border-radius: 20px;
+}
+
 /* ==================
   Footer
   ================== */

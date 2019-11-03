@@ -192,6 +192,18 @@ button.button {
   }
 }
 
+#import_form {
+  input {
+    width: 500px;
+    background: $secondary-color;
+    border: 5px solid $third-color;
+    color: $third-color;
+    padding: 5px 15px;
+    border-radius: 20px;
+    -webkit-border-radius: 20px
+  }
+}
+
 /* ==================
   Footer
   ================== */
