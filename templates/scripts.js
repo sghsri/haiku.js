@@ -12,7 +12,7 @@ function get_line_end_char(){
 }
 function random_pauses(){
     let periods = "";
-    let num_periods = Math.random() * (3 - 1) + 1;
+    let num_periods = Math.random() * (5 - 2) + 1;
     let line_end_char = get_line_end_char();
     for(let i = 0; i<num_periods;i++){
         periods += line_end_char;
@@ -67,6 +67,8 @@ function fill_input_from_url(url, pause=true){
 
 function play_haiku(haiku){
     var player = new SpeechSynthesisUtterance(haiku);
+    player.rate = .85;
+    player.pitch = .75;
     window.speechSynthesis.speak(player);
 }
 
