@@ -129,7 +129,11 @@ document.getElementById('convert_button').addEventListener("click", function(){
 document.getElementById('execute_button').addEventListener("click", function(){
     let code = document.getElementById('output').value.replace('// Output','').replace(/\r?\n|\r/g, "");
     console.log(code);
-    eval(code);
+    try {
+        eval(code);
+    } catch(error){
+        alert(error);    
+    }
 });
 
 document.getElementById('input_button').addEventListener("click", function(){
