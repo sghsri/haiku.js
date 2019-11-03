@@ -244,6 +244,9 @@ function animationLoop() {
 animationLoop();
 
 function addBlossoms(e) {
+  if(blossoms.length > 40) {
+    return;
+  }
   //cancelAnimationFrame(frame);
   for (let i = 0; i < 20; i++) {
     blossoms.push(createblossom(e));
