@@ -1,4 +1,10 @@
-
+const haiku_code = `// Input
+function potato(input, seeds, dude){
+   if(condition){
+       doSomething()
+   }
+   return input+seeds+dude;
+}`;
 const base = 'http://localhost:5000/';
 function resolve_input(){
     let url = document.getElementById('github_input').value;
@@ -10,6 +16,15 @@ function get_line_end_char(){
     let chars = [' ? ', ' ! '];
     return chars[Math.floor(Math.random()*chars.length)];
 }
+
+function long_pause(){
+    let periods = "";
+    for(let i = 0; i<6;i++){
+        periods += " ! ";
+    }
+    return periods;
+}
+
 function random_pauses(){
     let periods = "";
     let num_periods = Math.random() * (5 - 2) + 1;
@@ -29,30 +44,42 @@ function add_random_pause(code){
     return code_string;
 }
 
+function add_reading_to_all_haikus(haikus){
+    let out_string = "";
+    haikus.forEach(haiku => {
+        out_string += add_random_pause(haiku);
+        out_string += long_pause();
+    });
+    return out_string;
+}
+
+
 function remove_extraneous(haiku){
-    return haiku.replace(/[.,\/#!$%\^&\*\"\';:{}=\-_`~()+-><]/g, "");
+    return haiku.replace(/[.,\/#!$%\^&\*\"\';:{}=\-`~()+-><]/g, "");
 }
 
-function put_in_output(haiku){
-    document.getElementById('output').value = "// Output\n"+haiku.join('\n');
+function put_in_output(haikus){
+    document.getElementById('output').value = "// Output\n";
+    haikus.forEach((haiku) => {
+        document.getElementById('output').value += haiku.join('\n');
+        document.getElementById('output').value += "\n\n";
+    });
+
 }
 
-function query_backend_using_url(url, pause=true){
+function query_backend_using_url(url){
      fetch(url).then(response => {
         return response.json();
-    }).then(haiku => {
-        put_in_output(haiku);
-        if(pause)
-            haiku = add_random_pause(haiku);
-        else
-            haiku = haiku.join(' ');
-        play_haiku(haiku);
+    }).then(haikus => {
+        put_in_output(haikus);
+        let read_haiku = add_reading_to_all_haikus(haikus)
+        play_haiku(read_haiku);
     }).catch(err => {
         return err;
     })
 }
 
-function fill_input_from_url(url, pause=true){
+function fill_input_from_url(url){
     let api_url = base+'github/?url='+url;
      fetch(api_url).then(response => {
         return response.json();
@@ -95,11 +122,17 @@ document.getElementById('convert_button').addEventListener("click", function(){
     if(url){
         query_backend_using_url(url);
     } else {
-        let input_text = document.getElementById('input').value.replace(/\r?\n|\r/g, "");
+        let input_text = document.getElementById('input').value.replace('// Input','').replace(/\r?\n|\r/g, "\n");
         let url = base+'haiku/text/?text='+input_text;
         query_backend_using_url(url);
     }
 
+});
+
+document.getElementById('execute_button').addEventListener("click", function(){
+    console.log("run");
+    console.log(haiku_code);
+    eval(haiku_code);
 });
 
 document.getElementById('input_button').addEventListener("click", function(){
@@ -115,9 +148,10 @@ document.addEventListener("DOMContentLoaded", function(){
   $('#hero-title').css("color", colors[picIndex - 1]);
   $('#hero-subtitle').css("color", colors[picIndex - 1]);
 
-  window.setInterval(function(){
+  let video_loop = window.setInterval(function(){
     player.playVideo();
-  }, 100);
+  }, 500);
+
 
   window.setInterval(function(){
     $('#hero').css("background-image", "url(images/bg" + picIndex + ".gif)");
@@ -223,7 +257,7 @@ function createblossom(e) /* create a blossom */ {
 
     checkBounds() {
 
-      if (blossom.position.y > height) {
+      if (blossom.position.y + blossom.radius / 2 > height) {
         blossom.remove();
       }
       if (blossom.position.x > width) {

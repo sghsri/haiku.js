@@ -90,11 +90,9 @@ button.button {
 
   &.button-secondary {
     border: 3px solid $secondary-color;
+		background: $secondary-color;
     color: $third-color;
 
-    &:hover {
-      background: $secondary-color;
-    }
   }
 
   &:hover {
@@ -301,4 +299,10 @@ button.button {
 
 .lofi {
   position: absolute;
+}
+
+.level {
+	display: flex;
+	width: 100%;
+	justify-content: center;
 }

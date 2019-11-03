@@ -12,7 +12,7 @@ def load_js_file(file_name):
 
 
 def remove_extraneous_symbols(input_text):
-    regex = r"[.,\/#!$%\^&\*\"\';:{}=\-_`~()+-><]"
+    regex = r"[.,\/#!$%\^&\*\"\';:{}=\-`~()+-><]"
     result = re.sub(regex, ' ', input_text)
     return result
 
@@ -56,27 +56,30 @@ def remove_used_words(word_list,words):
         word_list.remove(word)
     return word_list
 
-def build_haiku_from_map(word_list, syl_map):
-    haiku = []
-    for syl_per_line in haiku_pattern:
-        line = []
-        looked_words = []
-        line_count = 0
-        for word in word_list:
-            looked_words.append(word)
-            num_syl = syl_map[word]
-            if num_syl > 0:
-                if num_syl+line_count <= syl_per_line:
+def build_haikus_from_map(word_list, syl_map):
+    all_haikues = []
+    while(word_list):
+        haiku = []
+        for syl_per_line in haiku_pattern:
+            line = []
+            looked_words = []
+            line_count = 0
+            for word in word_list:
+                looked_words.append(word)
+                num_syl = syl_map[word]
+                if num_syl > 0:
+                    if num_syl+line_count <= syl_per_line:
+                        line.append(word)
+                        line_count += num_syl
+                    # if we're here, the whole word wouldn't fit at the end of the line
+                    if line_count == syl_per_line:
+                        break
+                else:
                     line.append(word)
-                    line_count += num_syl
-                # if we're here, the whole word wouldn't fit at the end of the line
-                if line_count == syl_per_line:
-                    break
-            else:
-                line.append(word)
-        word_list = remove_used_words(word_list, looked_words)
-        haiku.append(line)
-    return list(map(lambda line: ' '.join(line),haiku))
+            word_list = remove_used_words(word_list, looked_words)
+            haiku.append(line)
+        all_haikues.append(list(map(lambda line: ' '.join(line),haiku)))
+    return all_haikues
 
 def print_haiku(haiku):
     # added extra formatting so that we only add spaces where it makes sense
@@ -101,11 +104,11 @@ def haiku(input_text):
     # then send to front-end ui
     all_list = get_all_list(input_text)
     syl_map = syllable_map(all_list)
-    haiku = build_haiku_from_map(all_list, syl_map)
-    return haiku
+    haikus = build_haikus_from_map(all_list, syl_map)
+    return haikus
 
 
 if __name__ == '__main__':
     input_text = load_js_file('code')
     # get_all_list(input_text)
-    haiku(input_text)
+    print(haiku(input_text))
