@@ -66,7 +66,7 @@ def build_haiku_from_map(word_list, syl_map):
                 line.append(word)
         word_list = remove_used_words(word_list, looked_words)
         haiku.append(line)
-    return haiku
+    return list(map(lambda line: ' '.join(line),haiku))
 
 def print_haiku(haiku):
     for line in haiku:
@@ -81,7 +81,7 @@ def haiku(input_text):
     all_list = get_all_list(input_text)
     syl_map = syllable_map(all_list)
     haiku = build_haiku_from_map(all_list, syl_map)
-    print_haiku(haiku)
+    return haiku
 
 
 if __name__ == '__main__':
