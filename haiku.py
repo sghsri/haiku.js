@@ -62,16 +62,14 @@ def build_haiku_from_map(word_list, syl_map):
                 if num_syl+line_count <= syl_per_line:
                     line.append(word)
                     line_count += num_syl
-                else:
-                    # if we're here, the whole word wouldn't fit at the end of the line
-                    
+                # if we're here, the whole word wouldn't fit at the end of the line
                 if line_count == syl_per_line:
                     break
             else:
                 line.append(word)
         word_list = remove_used_words(word_list, looked_words)
         haiku.append(line)
-    return haiku
+    return list(map(lambda line: ' '.join(line),haiku))
 
 def print_haiku(haiku):
     # added extra formatting so that we only add spaces where it makes sense
@@ -97,7 +95,7 @@ def haiku(input_text):
     all_list = get_all_list(input_text)
     syl_map = syllable_map(all_list)
     haiku = build_haiku_from_map(all_list, syl_map)
-    print_haiku(haiku)
+    return haiku
 
 
 if __name__ == '__main__':
