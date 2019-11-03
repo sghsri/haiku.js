@@ -13,14 +13,14 @@ def hello():
 def get_github_haiku():
     url = request.args.get('url')
     code = scrape_github_file(url)
-    code_haiku = haiku(code)
-    return prepare_response(code_haiku)
+    code_haikus = haiku(code)
+    return prepare_response(code_haikus)
 
 @app.route("/haiku/text/")
 def get_text_haiku():
     code = request.args.get('text')
-    code_haiku = haiku(code)
-    return prepare_response(code_haiku)
+    code_haikus = haiku(code)
+    return prepare_response(code_haikus)
 
 @app.route("/github/")
 def get_original_github():

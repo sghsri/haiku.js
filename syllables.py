@@ -5,6 +5,8 @@ import re
 dict_filename = 'cmudict.rep'
 
 def syllable_num(word):
+    if is_underscore(word):
+        return handle_underscore(word)
     if is_NOP(word):
         return 0
     try:
@@ -13,13 +15,13 @@ def syllable_num(word):
         return count_syllables_manually(word)
 
 def is_NOP(symbol):
-    return bool(re.search(r"[.,\/#!$%\^&\*\"\';:{}=\-_`~()+-><]",symbol))
+    return bool(re.search(r"[.,\/#!$%\^&\*\"\';:{}=\-_`~()+-><]",symbol)) or symbol==''
 
-def is_camel_case(symbol):
-    return bool(re.search(r"(?:[A-Z][a-z]+)+",symbol))
+def is_underscore(symbol):
+    return bool(re.search(r"_", symbol))
 
-def handle_camel_case(symbol):
-    words = re.split(r"(?:[A-Z][a-z]+)+",symbol)
+def handle_underscore(symbol):
+    words = re.split(r"_",symbol)
     num_syllables = 0
     for word in words:
         num_syllables += syllable_num(word)
@@ -29,7 +31,6 @@ def is_special(symbol):
     return is_camel_case(symbol)
 
 def count_syllables_manually(word):
-
     count = 0
     vowels = 'aeiouy'
     word = word.lower()
