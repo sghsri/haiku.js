@@ -1,4 +1,10 @@
-
+const haiku_code = `// Input
+function potato(input, seeds, dude){
+   if(condition){
+       doSomething()
+   }
+   return input+seeds+dude;
+}`;
 const base = 'http://localhost:5000/';
 function resolve_input(){
     let url = document.getElementById('github_input').value;
@@ -41,6 +47,7 @@ function query_backend_using_url(url, pause=true){
      fetch(url).then(response => {
         return response.json();
     }).then(haiku => {
+        haiku_code = haiku;
         put_in_output(haiku);
         if(pause)
             haiku = add_random_pause(haiku);
@@ -82,6 +89,12 @@ document.getElementById('convert_button').addEventListener("click", function(){
         query_backend_using_url(url);
     }
 
+});
+
+document.getElementById('execute_button').addEventListener("click", function(){
+    console.log("run")
+    console.log(haiku_code)
+    eval(haiku_code)
 });
 
 document.getElementById('input_button').addEventListener("click", function(){
