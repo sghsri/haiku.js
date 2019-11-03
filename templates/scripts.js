@@ -5,7 +5,6 @@ function resolve_input(){
 
 function get_line_end_char(){
     let chars = [' ? ', ' ! '];
-    console.log(chars);
     return chars[Math.floor(Math.random()*chars.length)];
 }
 function random_pauses(){
@@ -35,7 +34,6 @@ function query_backend(url, pause=true){
      fetch(url).then(response => {
         return response.json();
     }).then(haiku => {
-        console.log(haiku);
         // haiku = haiku.replace(/[.,\/#!$%\^&\*\"\';:{}=\-_`~()+-><]/g, "");
         if(pause)
             haiku = add_random_pause(haiku);
@@ -48,7 +46,6 @@ function query_backend(url, pause=true){
 }
 
 function play_haiku(haiku){
-    console.log(haiku);
     var player = new SpeechSynthesisUtterance(haiku);
     window.speechSynthesis.speak(player);
 }
@@ -74,11 +71,11 @@ document.addEventListener("DOMContentLoaded", function(){
   }, 10000);
 });
 
-document.body.addEventListener("click", addBlossoms);
+window.addEventListener("click", addBlossoms);
 
-let width = $(window).width()
-let height = $(window).height()
-console.log(height)
+let width = $(document.body).width()
+let height = $(document.body).height()
+
 const body = document.body;
 const elWrapper = document.querySelector(".blossom-wrapper");
 
@@ -115,7 +112,7 @@ function createblossom(e) /* create a blossom */ {
   const blossom = {
     el,
     absolutePosition: { x: width / 2, y: 0 },
-    position: { x: e.clientX, y: e.clientY },
+    position: { x: e.pageX, y: e.pageY },
     velocity: { x: vx, y: vy },
     mass: 0.1, //kg
     radius: el.offsetWidth, // 1px = 1cm
@@ -234,3 +231,4 @@ function onYouTubeIframeAPIReady() {
 
 function play () {
   player.playVideo();
+}
