@@ -1,8 +1,8 @@
 # Haiku.js
 
-Tired of writing weird syntax? Do you not know what a promis is? Would you rather read beautiful Japanese poetry all day rather than hundreds of lines of web development code? Look no further!
+Sometimes, coding in Javascript can be stressful, we get it. Promises, Prototypes, JSON, who knows what they mean (not us). We here at Haiku.js think we can make it better with some poetry.
 
-JavaScript can be a frustrating experience, so we wanted to make something that made the experience more zen.
+Preferably in three lines of five, seven, and five.
 
 ## Set Up
 
@@ -45,7 +45,6 @@ flask run
 
 Open up templates>index.html in your favorite browser to start writing some poetry!
 
-
+<hr/>
 
 Made for HackTX 2019
- 
