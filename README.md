@@ -6,44 +6,21 @@ Preferably in three lines of five, seven, and five.
 
 ## Set Up
 
-Make sure that you have python3 and flask installed
+Install all of the dependencies
 
 ```bash
-sudo pip3 install flask
-sudo pip3 install nltk
-sudo pip3 install requests
-sudo pip3 install bs4
+pip install -r requirements.txt
 ```
 
-You may need to do some additional work to get nltk working.
-
-In a terminal window run:
+Then to run the flask services execute
 
 ```bash
-python3
-
->>> 
-import nltk
-import ssl
-
-try:
-    _create_unverified_https_context = ssl._create_unverified_context
-except AttributeError:
-    pass
-else:
-    ssl._create_default_https_context = _create_unverified_https_context
-
-nltk.download('cmudict')
-```
-
-Then to run the flask services run
-
-```bash
-export FLASK_APP=main
 flask run
 ```
 
-Open up templates>index.html in your favorite browser to start writing some poetry!
+You may need to edit the base url in `client/scripts/js`
+
+Open up http://127.0.0.1:5000/ in your favorite browser to start writing some poetry!
 
 <hr/>
 
