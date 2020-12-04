@@ -1,13 +1,13 @@
-from flask import Flask, render_template
-app = Flask(__name__)
+from flask import Flask, send_from_directory, render_template
+app = Flask(__name__, static_folder='client', static_url_path='')
 from haiku import haiku
 from flask import request
 from github_scrape import scrape_github_file
 from util import prepare_response
+
 @app.route("/")
 def hello():
-  return render_template('./index.html')
-
+  return send_from_directory(app.static_folder, 'index.html')
 
 @app.route("/haiku/github/")
 def get_github_haiku():
