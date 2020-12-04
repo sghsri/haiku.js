@@ -1,4 +1,4 @@
-const base = "http://localhost:5000/";
+const base = window.location.hostname;
 function resolve_input() {
   let url = document.getElementById("github_input").value;
   if (url) {
