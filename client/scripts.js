@@ -1,4 +1,6 @@
-const base = window.location.hostname;
+// Change if working on locally
+// const base = "http://localhost:5000/";
+const base = "https://cryptic-lowlands-82260.herokuapp.com/";
 function resolve_input() {
   let url = document.getElementById("github_input").value;
   if (url) {
