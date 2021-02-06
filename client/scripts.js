@@ -327,7 +327,6 @@ function onYouTubeIframeAPIReady() {
     videoId: "5qap5aO4i9A",
     playerVars: {
       color: "white",
-      playlist: "taJ60kskkns,FG0fTKAqZ5g",
     },
   });
 }
