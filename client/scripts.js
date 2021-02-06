@@ -1,6 +1,6 @@
 // Change if working on locally
 // const base = "http://localhost:5000/";
-const base = "https://cryptic-lowlands-82260.herokuapp.com/";
+const base = "https://haiku-js.herokuapp.com/";
 function resolve_input() {
   let url = document.getElementById("github_input").value;
   if (url) {
